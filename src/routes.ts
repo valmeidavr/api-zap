@@ -9,6 +9,7 @@ import { DetailuserController } from './controllers/user/DetailUserController'
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
 import uploadConfig from './config/multer'
+import { AuthUserService } from './services/user/AuthUserService';
 
 const router = Router();
 
@@ -18,6 +19,8 @@ const upload = multer(uploadConfig.upload("./tmp"));
 router.post('/users', new CreateUserController().handle)
 
 router.post('/session', new AuthUserController().handle)
+
+router.post('/session/google' , new AuthUserServiceGoogle().handle);
 
 router.get('/me', isAuthenticated,  new DetailuserController().handle )
 
